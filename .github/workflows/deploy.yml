@@ -6,23 +6,15 @@ on:
       - main
 
 env:
-  # TODO: Replace with your Google Cloud Project ID
-  PROJECT_ID: letterstorm-project 
-  # TODO: Replace with your Artifact Registry name (e.g., my-repo)
-  GAR_NAME: letterstorm-repo 
-  # TODO: Replace with your Google Cloud Region (e.g., us-central1)
-  GAR_LOCATION: us-central1 
-  # TODO: Replace with your desired Cloud Run service name
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  GAR_NAME: ${{ vars.GCP_GAR_NAME }}
+  GAR_LOCATION: ${{ vars.GCP_REGION }}
   SERVICE: letterstorm-app
-  # TODO: Replace with your Google Cloud Region (e.g., us-central1)
-  REGION: us-central1 
+  REGION: ${{ vars.GCP_REGION }}
   
   # Workload Identity Federation settings
-  # TODO: Create a Workload Identity Pool and Provider in GCP and add its name here
-  # Example: projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider
-  WORKLOAD_IDENTITY_PROVIDER: projects/212686138659/locations/global/workloadIdentityPools/github-pool/providers/github-provider 
-  # TODO: Service account email that has permissions to push to GAR and deploy to Cloud Run
-  SERVICE_ACCOUNT: github-actions-sa@letterstorm-project.iam.gserviceaccount.com
+  WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+  SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
 jobs:
   deploy:
